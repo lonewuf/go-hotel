@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+<div class="row">
+    <div class="col-md-6  mx-auto">
+        <div class="card mb-5">
+            <div class="card-header text-center">Add Hotel</div>
+            <div class="card-body">
+                <form action="/hotels" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Name of Hotel</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" name="image">
+                    </div>
+                    <div class="form-group">
+                        <label for="detail">Detail</label>
+                        <input type="text" class="form-control" name="detail">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" rows="5" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

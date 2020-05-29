@@ -1,0 +1,70 @@
+<% include ../partials/header %>
+
+<div id="spacer"></div>
+
+<div class="container">
+    <div class="row mb-5">
+      <div class="col-3">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+            <%= hotel.name %>
+        </a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Photos</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Detail</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Conclusion</a>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            <div class="card">
+              <img class="card-img-top" src="<%= hotel.image %>" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title"><%= hotel.name %></h5>
+                <p class="text-muted">by <%= hotel.author.username %></p>
+                <p class="card-text"><%= hotel.description %></p>
+                <% if(currentUser && hotel.author.id.equals(currentUser._id)){ %>
+                   <a class="btn btn-warning btn-sm" href="/hotels/<%= hotel._id %>/edit">Edit</a>
+                   <form action="/hotels/<%= hotel._id %>?_method=DELETE" method="POST" style="display: inline-block">
+                       <button type="submit" class="btn btn-danger btn-sm" >
+                           Delete
+                       </button>
+                   </form>
+                <% } %>
+              </div>
+              <div class="card-footer">
+              <% hotel.comments.forEach(function(comment){ %>
+                 <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <h5>Author</h5>
+                            <p><%= comment.text %></p>
+                        </div>
+                        <% if(currentUser && hotel.author.id.equals(currentUser._id)) { %>
+                           <a class="btn btn-warning btn-sm" href="/hotels/<%= hotel._id %>/comments/<%= comment.id %>/edit">Edit</a>
+                           <form style="display: inline-block" action="/hotels/<%= hotel._id %>/comments/<%= comment.id %>?_method=DElETE" method=POST>
+                              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                           </form>
+                        <% } %>
+                    </div>   
+                </div>
+              <% }) %>
+                <form action="/hotels/<%= hotel._id %>/comments" method="POST">
+                  <div class="form-group">
+                     <textarea class="form-control" placeholder="Your comment here..." name="comment[text]" rows="4"></textarea>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Photos here</div>
+          <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Details here</div>
+          <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Conclusion here</div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

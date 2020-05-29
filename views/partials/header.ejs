@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GO Hotel</title>
+
+  <!-- <link rel="stylesheet" href="css/bootsrap.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="css/style2.css"> -->
+</head>
+<body>
+
+
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark  mb-3">>
+  <a class="navbar-brand" href="/hotels">GO Hotel</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href="/hotels">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/">Landing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/hotels/add">Add Hotel</a>
+      </li>
+    </ul>
+    
+    <ul class="navbar-nav ml-auto">
+    <% if(!currentUser){ %>
+       <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li><li class="nav-item">
+        <a class="nav-link" href="/register">Register</a>
+      </li>
+    <% } else { %>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Signed in as, <%= currentUser.username %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/logout">Logout</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    <% } %>    
+    </ul>
+  </div>
+</nav>
+
+<div id="spacer">
+</div>
+
+
+   <% if(error && error.length > 0){ %>
+      <% error.forEach(err => { %>
+        <div class="alert alert-danger m-2" role="alert">
+          <%= err %>
+        </div>
+      <% }) %>
+  <% } if(success && success.length > 0) { %>
+      <div class="alert alert-success m-2" role="alert">
+        <%= success %>
+      </div>
+   <% } else %>
+

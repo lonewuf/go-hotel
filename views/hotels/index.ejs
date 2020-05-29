@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+
+	
+<div class="card-columns indexPics">
+	<div class="container">
+<% hotels.forEach(function(hotel){ %>
+		 <div class="card text-center index">
+			  <img class="card-img-top" src="<%= hotel.image %>" alt="Card image cap">
+			  <div class="card-body">
+			    <h5 class="card-title"><%= hotel.name %></h5>
+			    <p class="card-text"><%= hotel.detail %></p>
+			  </div>
+			  <a href="/hotels/<%= hotel._id %>" class="btn mb-3 btn-primary">Read More</a>
+		 </div>
+<% }) %>
+	 </div>	
+</div>
+
+
+
+<% include ../partials/footer %>
+
